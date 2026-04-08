@@ -4,14 +4,14 @@
 
 /* ─── CSS Variables ─────────────────────────────────────── */
 :root {
-  --primary:        #90303E;
-  --primary-hover:  #6e2330;
+  --primary:        #8e7a82;
+  --primary-hover:  #74636b;
   --secondary:      #FDFFFF;
   --light:          #F5F5F5;
   --dark:           #1a1a1a;
   --gray:           #6B7280;
   --border:         #E5E7EB;
-  --primary-dim:    rgba(144, 48, 62, 0.10);
+  --primary-dim:    rgba(142, 122, 130, 0.14);
   --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md:      0 4px 16px rgba(0, 0, 0, 0.10);
   --shadow-lg:      0 8px 32px rgba(0, 0, 0, 0.14);
@@ -210,13 +210,13 @@ button {
   z-index: 1000;
   height: var(--navbar-h);
   background-color: var(--primary);
-  box-shadow: 0 2px 12px rgba(144, 48, 62, 0.20);
+  box-shadow: 0 2px 12px rgba(142, 122, 130, 0.24);
   transition: background-color var(--transition), box-shadow var(--transition);
 }
 
 .navbar.scrolled {
   background-color: var(--primary);
-  box-shadow: 0 2px 16px rgba(144, 48, 62, 0.28);
+  box-shadow: 0 2px 16px rgba(142, 122, 130, 0.34);
 }
 
 .navbar__inner {
@@ -322,7 +322,7 @@ button {
 .hero__badge {
   display: inline-block;
   background-color: var(--primary-dim);
-  border: 1px solid rgba(144, 48, 62, 0.20);
+  border: 1px solid rgba(142, 122, 130, 0.30);
   color: var(--primary);
   font-size: 0.8rem;
   font-weight: 500;
@@ -434,7 +434,7 @@ button {
 
 .service-card:hover .service-card__icon,
 .service-card:focus-visible .service-card__icon {
-  background-color: rgba(144, 48, 62, 0.18);
+  background-color: rgba(142, 122, 130, 0.24);
 }
 
 .service-card__icon svg {
@@ -785,7 +785,7 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(144, 48, 62, 0.25);
+  box-shadow: 0 4px 12px rgba(142, 122, 130, 0.28);
 }
 
 .review-card__name {
@@ -945,7 +945,7 @@ a.contact-card:hover {
 }
 
 a.contact-card:hover .contact-card__icon {
-  background-color: rgba(144, 48, 62, 0.18);
+  background-color: rgba(142, 122, 130, 0.24);
 }
 
 .contact-card__icon svg {
@@ -1283,7 +1283,7 @@ a.contact-card--instagram:hover .contact-card__icon {
     left: 0;
     right: 0;
     background-color: var(--primary-hover);
-    box-shadow: 0 4px 24px rgba(144, 48, 62, 0.30);
+    box-shadow: 0 4px 24px rgba(142, 122, 130, 0.36);
     flex-direction: column;
     align-items: stretch;
     gap: 0;
@@ -1332,12 +1332,12 @@ a.contact-card--instagram:hover .contact-card__icon {
   }
 
   .hero__content {
-    order: 2;
+    order: 1;
     gap: 1rem;
   }
 
   .hero__image {
-    order: 1;
+    order: 2;
     aspect-ratio: 16 / 8;
     max-height: 250px;
     border-radius: var(--radius-md);
