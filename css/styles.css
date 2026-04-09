@@ -297,19 +297,44 @@ button {
    HERO / INICIO
    ════════════════════════════════════════════════════════════ */
 .hero {
-  background-color: var(--secondary);
+  position: relative;
   padding-top: var(--navbar-h);
   overflow: hidden;
   border-bottom: 1px solid var(--border);
 }
 
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(22, 10, 16, 0.68) 0%,
+    rgba(22, 10, 16, 0.52) 100%
+  );
+  z-index: 1;
+}
+
 .hero__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 3.5rem;
+  justify-content: center;
+  text-align: center;
   min-height: calc(100svh - var(--navbar-h));
-  padding-block: 4rem;
+  padding-block: 5rem;
+  position: relative;
+  z-index: 2;
 }
 
 /* Left: text */
@@ -317,13 +342,15 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  align-items: center;
+  max-width: 700px;
 }
 
 .hero__badge {
   display: inline-block;
-  background-color: var(--primary-dim);
-  border: 1px solid rgba(142, 122, 130, 0.30);
-  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.06em;
@@ -336,14 +363,15 @@ button {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(2.25rem, 5vw, 3.75rem);
   font-weight: 600;
-  color: var(--dark);
+  color: var(--secondary);
   line-height: 1.14;
   letter-spacing: 0.01em;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
 }
 
 .hero__slogan {
   font-size: clamp(1rem, 1.6vw, 1.25rem);
-  color: var(--gray);
+  color: rgba(255, 255, 255, 0.85);
   font-style: italic;
   font-weight: 400;
   line-height: 1.5;
@@ -354,31 +382,19 @@ button {
   gap: 0.875rem;
   flex-wrap: wrap;
   margin-top: 0.5rem;
+  justify-content: center;
 }
 
-/* Right: image */
-@keyframes heroFloat {
-  0%   { transform: translateY(-6px); }
-  100% { transform: translateY(6px); }
+/* Hero outline button override — legible on video */
+.hero__content .btn--outline {
+  color: var(--secondary);
+  border-color: rgba(255, 255, 255, 0.60);
 }
 
-.hero__image {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 3px solid var(--border);
-  aspect-ratio: 3 / 4;
-  max-height: 540px;
-  animation: heroFloat 5s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-.hero__image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
+.hero__content .btn--outline:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--secondary);
+  border-color: rgba(255, 255, 255, 0.85);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -1210,15 +1226,7 @@ a.contact-card--instagram:hover .contact-card__icon {
 
   /* Hero */
   .hero__inner {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding-block: 3.5rem;
-    min-height: auto;
-  }
-
-  .hero__image {
-    aspect-ratio: 4 / 3;
-    max-height: 340px;
+    padding-block: 4rem;
   }
 
   /* About */
@@ -1327,20 +1335,11 @@ a.contact-card--instagram:hover .contact-card__icon {
 
   /* Hero mobile */
   .hero__inner {
-    gap: 2rem;
-    padding-block: 2.5rem;
+    padding-block: 3rem;
   }
 
   .hero__content {
-    order: 1;
     gap: 1rem;
-  }
-
-  .hero__image {
-    order: 2;
-    aspect-ratio: 16 / 8;
-    max-height: 250px;
-    border-radius: var(--radius-md);
   }
 
   .hero__actions {
