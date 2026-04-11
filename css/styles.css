@@ -209,13 +209,15 @@ button {
   right: 0;
   z-index: 1000;
   height: var(--navbar-h);
-  background-color: var(--primary);
+  background-color: rgba(142, 122, 130, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 12px rgba(142, 122, 130, 0.24);
   transition: background-color var(--transition), box-shadow var(--transition);
 }
 
 .navbar.scrolled {
-  background-color: var(--primary);
+  background-color: rgba(116, 99, 107, 0.90);
   box-shadow: 0 2px 16px rgba(142, 122, 130, 0.34);
 }
 
@@ -717,6 +719,202 @@ button {
 }
 
 /* ════════════════════════════════════════════════════════════
+   COLABORACIONES — Carrusel con Ken Burns
+   ════════════════════════════════════════════════════════════ */
+.colabs {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  overflow: hidden;
+  background-color: #111;
+}
+
+.colabs__frame {
+  display: none; /* eliminado — ya no se usa el frame contenido */
+}
+
+.colabs__slider {
+  position: absolute;
+  inset: 0;
+}
+
+.colabs__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.colabs__slide--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.colabs__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Ken Burns */
+.colabs__slide--active .colabs__img {
+  animation: colabs-kb 8s ease-in-out forwards;
+}
+.colabs__slide--active:nth-child(even) .colabs__img {
+  animation: colabs-kb-alt 8s ease-in-out forwards;
+}
+@keyframes colabs-kb {
+  from { transform: scale(1.00) translateX(0); }
+  to   { transform: scale(1.08) translateX(-1%); }
+}
+@keyframes colabs-kb-alt {
+  from { transform: scale(1.08) translateX(1%); }
+  to   { transform: scale(1.00) translateX(-1%); }
+}
+
+/* Overlay: degradado izquierda fuerte + inferior suave */
+.colabs__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(to right,  rgba(10,10,10,0.72) 0%, rgba(10,10,10,0.30) 45%, transparent 70%),
+    linear-gradient(to top,    rgba(10,10,10,0.55) 0%, transparent 30%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 3.5rem 2rem;
+  pointer-events: none;
+}
+
+/* Texto arriba a la izquierda */
+.colabs__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 420px;
+}
+
+.colabs__tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.70);
+}
+
+.colabs__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.25rem, 2.4vw, 1.875rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.18;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* Dots abajo al centro */
+.colabs__bottom {
+  display: flex;
+  justify-content: center;
+  pointer-events: all;
+}
+
+.colabs__dots {
+  display: flex;
+  gap: 0.5rem;
+  pointer-events: all;
+}
+
+.colabs__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: rgba(255, 255, 255, 0.40);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.colabs__dot.active {
+  background-color: #fff;
+  width: 28px;
+}
+
+/* Botones prev/next */
+.colabs__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.colabs__btn:hover {
+  background-color: rgba(255, 255, 255, 0.30);
+}
+
+.colabs__btn svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5;
+}
+
+.colabs__btn--prev { left: 1.25rem; }
+.colabs__btn--next { right: 1.25rem; }
+
+  /* Mobile: altura reducida + object-position por imagen para centrar en Victoria */
+@media (max-width: 640px) {
+  .colabs {
+    height: 52vw;
+    min-height: 260px;
+  }
+
+  .colabs__overlay {
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .colabs__title {
+    font-size: clamp(0.875rem, 3.5vw, 1.1rem);
+  }
+
+  .colabs__btn {
+    display: none;
+  }
+
+  /* Posición base: derecha-centro (mayoría de fotos tiene a Victoria a la derecha) */
+  .colabs__img {
+    object-position: 72% 20%;
+  }
+
+  /* colab7 — Victoria a la derecha */
+  .colabs__slide:nth-child(2) .colabs__img { object-position: 75% 15%; }
+
+  /* colab8 — Victoria a la derecha-centro */
+  .colabs__slide:nth-child(3) .colabs__img { object-position: 68% 25%; }
+
+  /* colab10 — Victoria a la izquierda */
+  .colabs__slide:nth-child(5) .colabs__img { object-position: 18% 20%; }
+}
+
+/* ════════════════════════════════════════════════════════════
    REVIEWS — Carrusel de 1 reseña a la vez
    ════════════════════════════════════════════════════════════ */
 .reviews {
@@ -916,7 +1114,7 @@ button {
 /* Row 1: Contact cards */
 .contact__actions {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -934,6 +1132,7 @@ button {
   color: inherit;
   text-decoration: none;
   cursor: default;
+  grid-column: span 2;
   transition: box-shadow var(--transition), transform var(--transition),
     border-color var(--transition);
 }
@@ -1011,9 +1210,30 @@ a.contact-card--instagram:hover .contact-card__icon {
   background-color: rgba(225, 48, 108, 0.20);
 }
 
+.contact-card--email .contact-card__icon {
+  background-color: rgba(142, 122, 130, 0.12);
+  color: var(--primary);
+}
+
+a.contact-card--email:hover .contact-card__icon {
+  background-color: rgba(142, 122, 130, 0.22);
+}
+
+.contact-card--email {
+  grid-column: 2 / span 2;
+}
+
+.contact-card--location {
+  grid-column: 4 / span 2;
+}
+
 .contact-card--location .contact-card__icon {
   background-color: rgba(66, 133, 244, 0.10);
   color: #4285F4;
+}
+
+a.contact-card--location:hover .contact-card__icon {
+  background-color: rgba(66, 133, 244, 0.20);
 }
 
 /* Row 2: Hours */
@@ -1108,7 +1328,9 @@ a.contact-card--instagram:hover .contact-card__icon {
    FOOTER
    ════════════════════════════════════════════════════════════ */
 .footer {
-  background-color: var(--primary);
+  background-color: rgba(142, 122, 130, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: rgba(253, 255, 255, 0.70);
   padding-top: 2.5rem;
   padding-bottom: 1.25rem;
@@ -1185,6 +1407,17 @@ a.contact-card--instagram:hover .contact-card__icon {
 .footer__copy-row p {
   font-size: 0.8125rem;
   color: rgba(253, 255, 255, 0.45);
+}
+
+.footer__dev-link {
+  color: rgba(253, 255, 255, 0.70);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+
+.footer__dev-link:hover {
+  color: var(--secondary);
 }
 
 /* ════════════════════════════════════════════════════════════
@@ -1267,6 +1500,18 @@ a.contact-card--instagram:hover .contact-card__icon {
   /* Contact */
   .contact__actions {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-card {
+    grid-column: span 1;
+  }
+
+  .contact-card--email {
+    grid-column: auto;
+  }
+
+  .contact-card--location {
+    grid-column: span 2;
   }
 }
 
@@ -1444,6 +1689,14 @@ a.contact-card--instagram:hover .contact-card__icon {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .contact-card--location {
+    grid-column: span 2;
+  }
+
+  .contact-card--email {
+    grid-column: auto;
+  }
+
   .contact__schedule {
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -1489,6 +1742,10 @@ a.contact-card--instagram:hover .contact-card__icon {
 
   .contact__actions {
     grid-template-columns: 1fr;
+  }
+
+  .contact-card--location {
+    grid-column: span 1;
   }
 
   .contact__schedule-item {

@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inmuebles: {
       icon: 'home',
       title: 'Compraventa de Inmuebles',
-      body: 'Gestión integral del proceso de compraventa de bienes inmuebles: revisión de títulos de propiedad, redacción de boletos de reserva y escrituras definitivas, certificaciones registrales y coordinación de todas las partes intervinientes. Cada operación es ejecutada con la mayor diligencia para garantizar una transacción segura, transparente y con plena validez jurídica ante el Registro de la Propiedad.'
+      body: 'Gestión integral del proceso de compraventa de bienes inmuebles: revisión de títulos de propiedad, redacción de boletos de reserva y escrituras definitivas, certificaciones registrales y coordinación de todas las partes intervinientes. Cada operación es ejecutada con la mayor diligencia para garantizar una transacción segura, transparente y con plena validez jurídica.'
     },
     vehiculos: {
       icon: 'car',
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sucesiones: {
       icon: 'users',
       title: 'Sucesiones y Testamentos',
-      body: 'Tramitación completa de procesos sucesorios con acompañamiento personalizado en cada etapa: inventario de bienes, declaratoria de herederos, partición de herencias y representación ante el Poder Judicial. También redactamos testamentos cumpliendo todas las formalidades legales vigentes en Uruguay, para garantizar que la voluntad del testador sea respetada de manera íntegra y sin contratiempos.'
+      body: 'Tramitación completa de procesos sucesorios con acompañamiento personalizado en cada etapa: inventario de bienes, declaratoria de herederos, partición de herencias. También redactamos testamentos cumpliendo todas las formalidades legales vigentes en Uruguay, para garantizar que la voluntad del testador sea respetada de manera íntegra y sin contratiempos.'
     },
     actas: {
       icon: 'clipboard-list',
@@ -115,6 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
       icon: 'building-2',
       title: 'Constitución de Propiedades',
       body: 'Tramitación de constituciones de propiedad horizontal, declaratorias de inversión, reglamentos de copropiedad, adjudicaciones de unidades y promesas de compraventa en proyectos inmobiliarios. Asesoramiento integral para desarrolladores, constructores y particulares que buscan dar forma legal a sus proyectos con total seguridad jurídica ante el Ministerio de Vivienda y los registros correspondientes.'
+    },
+    sas: {
+      icon: 'briefcase',
+      title: 'Constitución de SAS',
+      body: 'Asesoramiento integral en constitución de Sociedades por Acciones Simplificadas (SAS), incluyendo redacción de estatutos, inscripción registral y acompañamiento en todo el proceso. Soluciones ágiles, seguras y adaptadas a cada emprendimiento.'
     }
   };
 
@@ -309,7 +314,65 @@ document.addEventListener('DOMContentLoaded', () => {
   initCarousel();
 
   // ──────────────────────────────────────────────────────────
-  // 6. FADE-IN — Intersection Observer
+  // 6. COLABORACIONES — Ken Burns crossfade carousel
+  // ──────────────────────────────────────────────────────────
+  const colabsSlider = document.getElementById('colabsSlider');
+  const colabsDotsEl = document.getElementById('colabsDots');
+  const colabsPrevBtn = document.getElementById('colabsPrev');
+  const colabsNextBtn = document.getElementById('colabsNext');
+
+  if (colabsSlider) {
+    const colabSlides = Array.from(colabsSlider.querySelectorAll('.colabs__slide'));
+    const totalColabs = colabSlides.length;
+    let colabIndex   = 0;
+    let colabTimer   = null;
+
+    // Build dots
+    colabSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'colabs__dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Imagen ${i + 1}`);
+      dot.addEventListener('click', () => { goToColab(i); resetColabTimer(); });
+      colabsDotsEl.appendChild(dot);
+    });
+    const colabDots = colabsDotsEl.querySelectorAll('.colabs__dot');
+
+    function goToColab(index) {
+      // Remove active & reset Ken Burns by replacing img with clone
+      const prevSlide = colabSlides[colabIndex];
+      const prevImg   = prevSlide.querySelector('.colabs__img');
+      prevSlide.classList.remove('colabs__slide--active');
+      const clone = prevImg.cloneNode(true);
+      prevSlide.replaceChild(clone, prevImg);
+
+      colabIndex = ((index % totalColabs) + totalColabs) % totalColabs;
+      colabSlides[colabIndex].classList.add('colabs__slide--active');
+      colabDots.forEach((d, i) => d.classList.toggle('active', i === colabIndex));
+    }
+
+    function resetColabTimer() {
+      clearInterval(colabTimer);
+      colabTimer = setInterval(() => goToColab(colabIndex + 1), 4500);
+    }
+
+    colabsPrevBtn.addEventListener('click', () => { goToColab(colabIndex - 1); resetColabTimer(); });
+    colabsNextBtn.addEventListener('click', () => { goToColab(colabIndex + 1); resetColabTimer(); });
+
+    // Touch swipe
+    let colabTouchX = 0;
+    colabsSlider.addEventListener('touchstart', e => { colabTouchX = e.touches[0].clientX; }, { passive: true });
+    colabsSlider.addEventListener('touchend', e => {
+      const delta = colabTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(delta) > 45) { goToColab(colabIndex + (delta > 0 ? 1 : -1)); resetColabTimer(); }
+    }, { passive: true });
+
+    resetColabTimer();
+
+    if (typeof lucide !== 'undefined') lucide.createIcons({ nodes: [colabsPrevBtn, colabsNextBtn] });
+  }
+
+  // ──────────────────────────────────────────────────────────
+  // 7. FADE-IN — Intersection Observer
   // ──────────────────────────────────────────────────────────
   const observer = new IntersectionObserver(
     (entries) => {

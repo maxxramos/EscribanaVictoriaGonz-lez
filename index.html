@@ -79,7 +79,7 @@
 
           <div class="hero__content fade-in">
             <span class="hero__badge">Maldonado · Uruguay</span>
-            <h1 class="hero__title">Escribana<br />Victoria González</h1>
+            <h1 class="hero__title">Estudio Notarial<br />Victoria González</h1>
             <p class="hero__slogan">Confianza y experiencia en cada trámite notarial.</p>
             <div class="hero__actions">
               <a
@@ -230,6 +230,20 @@
               <p>Constitución de propiedad horizontal y declaratorias para desarrollos inmobiliarios.</p>
             </div>
 
+            <div
+              class="service-card"
+              data-service="sas"
+              tabindex="0"
+              role="button"
+              aria-label="Ver más sobre Constitución de SAS"
+            >
+              <div class="service-card__header">
+                <div class="service-card__icon"><i data-lucide="briefcase"></i></div>
+                <h4>Constitución de SAS</h4>
+              </div>
+              <p>Constitución de Sociedades por Acciones Simplificadas con asesoramiento integral y gestión ágil.</p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -274,14 +288,13 @@
             <span class="section__tag">Quiénes somos</span>
             <h2 class="section__title">Escribana Victoria González</h2>
             <p>
-              Victoria González es escribana pública egresada de la Universidad de la República,
-              con más de 10 años de ejercicio profesional en el departamento de Maldonado.
+              Egresada de la Universidad de la República, la Esc. Victoria González dirige su estudio en Maldonado, brindando cobertura integral a toda la zona este del país.
               Su estudio se especializa en brindar soluciones notariales con un enfoque cercano,
               claro y eficiente, siendo reconocida por su agilidad y calidez humana.
             </p>
             <p>
-              Con sólida experiencia en operaciones inmobiliarias, procesos sucesorios y
-              documentación comercial, Victoria acompaña a cada cliente entendiendo sus
+              Con sólida experiencia en operaciones inmobiliarias, procesos sucesorios,
+              documentación comercial y actas comerciales, Victoria acompaña a cada cliente entendiendo sus
               necesidades reales, garantizando que cada trámite se resuelva en tiempo y con
               la mayor seguridad jurídica posible.
             </p>
@@ -331,6 +344,49 @@
           </div>
 
         </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════
+           COLABORACIONES
+      ═══════════════════════════════════════ -->
+      <section class="colabs" id="colaboraciones">
+
+        <div class="colabs__slider" id="colabsSlider">
+          <div class="colabs__slide colabs__slide--active">
+            <img src="img/colab6.png" alt="Participación en evento Enjoy Club" class="colabs__img" />
+          </div>
+          <div class="colabs__slide">
+            <img src="img/colab7.png" alt="Colaboración en sorteo Enjoy Club" class="colabs__img" />
+          </div>
+          <div class="colabs__slide">
+            <img src="img/colab8.png" alt="Escribana Victoria González en evento" class="colabs__img" />
+          </div>
+          <div class="colabs__slide">
+            <img src="img/colab9.png" alt="Participación notarial en evento" class="colabs__img" />
+          </div>
+          <div class="colabs__slide">
+            <img src="img/colab10.png" alt="Colaboración con Enjoy Club" class="colabs__img" />
+          </div>
+        </div>
+
+        <!-- Overlay con texto arriba a la izquierda y dots abajo al centro -->
+        <div class="colabs__overlay">
+          <div class="colabs__text">
+            <span class="colabs__tag">En acción</span>
+            <h2 class="colabs__title">Colaboraciones</h2>
+          </div>
+          <div class="colabs__bottom">
+            <div class="colabs__dots" id="colabsDots"></div>
+          </div>
+        </div>
+
+        <button class="colabs__btn colabs__btn--prev" id="colabsPrev" aria-label="Anterior">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        <button class="colabs__btn colabs__btn--next" id="colabsNext" aria-label="Siguiente">
+          <i data-lucide="chevron-right"></i>
+        </button>
+
       </section>
 
       <!-- ═══════════════════════════════════════
@@ -516,7 +572,7 @@
             <span class="section__tag">Hablemos</span>
             <h2 class="section__title">Contacto</h2>
             <p class="section__subtitle">
-              Disponible de lunes a viernes de 9:00 a.m. a 7:00 p.m.
+              Disponible de lunes a viernes de 9:00 a.m. a 18:00 hs.
             </p>
           </div>
 
@@ -557,11 +613,20 @@
                 <span class="contact-card__value">@v.gonzalez_escribana</span>
               </a>
 
-              <div class="contact-card contact-card--location">
+              <a
+                href="mailto:escribana.gonzalezvictoria@gmail.com"
+                class="contact-card contact-card--email"
+              >
+                <div class="contact-card__icon"><i data-lucide="mail"></i></div>
+                <span class="contact-card__label">Correo</span>
+                <span class="contact-card__value">escribana.gonzalezvictoria@gmail.com</span>
+              </a>
+
+              <a href="#mapa" class="contact-card contact-card--location">
                 <div class="contact-card__icon"><i data-lucide="map-pin"></i></div>
                 <span class="contact-card__label">Ubicación</span>
-                <span class="contact-card__value">Fco. Aca de Figueroa, 20000 Maldonado, Uruguay</span>
-              </div>
+                <span class="contact-card__value">Torre San Fernando II apartamento 602, (atras de la junta Departamental de Maldonado)</span>
+              </a>
 
             </div><!-- /contact__actions -->
 
@@ -574,23 +639,23 @@
               <div class="contact__schedule">
                 <div class="contact__schedule-item">
                   <span class="contact__day">Lunes</span>
-                  <span class="contact__time">9:00 a.m. – 7:00 p.m.</span>
+                  <span class="contact__time">9:00 a.m. – 18:00 hs.</span>
                 </div>
                 <div class="contact__schedule-item">
                   <span class="contact__day">Martes</span>
-                  <span class="contact__time">9:00 a.m. – 7:00 p.m.</span>
+                  <span class="contact__time">9:00 a.m. – 18:00 hs.</span>
                 </div>
                 <div class="contact__schedule-item">
                   <span class="contact__day">Miércoles</span>
-                  <span class="contact__time">9:00 a.m. – 7:00 p.m.</span>
+                  <span class="contact__time">9:00 a.m. – 18:00 hs.</span>
                 </div>
                 <div class="contact__schedule-item">
                   <span class="contact__day">Jueves</span>
-                  <span class="contact__time">9:00 a.m. – 7:00 p.m.</span>
+                  <span class="contact__time">9:00 a.m. – 18:00 hs.</span>
                 </div>
                 <div class="contact__schedule-item">
                   <span class="contact__day">Viernes</span>
-                  <span class="contact__time">9:00 a.m. – 7:00 p.m.</span>
+                  <span class="contact__time">9:00 a.m. – 18:00 hs.</span>
                 </div>
                 <div class="contact__schedule-item contact__schedule-item--closed">
                   <span class="contact__day">Sábado</span>
@@ -604,9 +669,9 @@
             </div><!-- /contact__hours-row -->
 
             <!-- Fila 3: Mapa -->
-            <div class="contact__map-row">
+            <div class="contact__map-row" id="mapa">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.9!2d-54.9590896!3d-34.9150324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95751b00297d4395%3A0xde530ebab263c3b9!2sEscribana%20Victoria%20Gonz%C3%A1lez!5e0!3m2!1ses!2suy!4v1712520000000!5m2!1ses!2suy"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.0!2d-54.9598638!3d-34.9140801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95751b324ca3d67b%3A0x8608a90105b03506!2sTorre+San+Fernando+2!5e0!3m2!1ses!2suy!4v1744000000000!5m2!1ses!2suy"
                 width="100%"
                 height="100%"
                 style="border:0;"
@@ -652,6 +717,7 @@
 
         <div class="footer__copy-row">
           <p>© 2026 Escribana Victoria González · Todos los derechos reservados.</p>
+          <p>Desarrollado por <a href="https://netguay.com/" target="_blank" rel="noopener noreferrer" class="footer__dev-link">NetGuay</a></p>
         </div>
       </div>
     </footer>
